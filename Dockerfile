@@ -8,7 +8,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix temp -ldflags '-extldfla
 FROM busybox
 WORKDIR /root/
 COPY --from=builder /go/src/web/web .
-ADD html/index.html html/
+ADD index.html html/
 ADD stylesheet stylesheet/
 ADD resources /resources
 ADD images images/
