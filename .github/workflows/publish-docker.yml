@@ -6,7 +6,7 @@ on:
         - '**'
         tags:
             - 'v*.*.*'
-     pull:
+  pull:
          branches:
              - 'master'
 jobs:
@@ -30,6 +30,7 @@ jobs:
                 type=semver,pattern={{major}}
                 type=raw,testing
                 type=sha
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
