@@ -17,18 +17,13 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
-        name: Docker Meta
-        id: meta
-        uses: crazy-max/ghaction-docker-meta@v2
-        with:
-            tags: |
-                type=ref,event=branch
-                type=ref,event=pr
-                type=semver,pattern={{version}}
-                type=semver,pattern={{major}}.{{minor}}
-                type=semver,pattern={{major}}
-                type=raw,testing
-                type=sha
+        name: Set Environment Variables
+        run: |
+            IMG=nusak/nusak
+            echo "IMG=${IMG}" >> $GITHUB_ENV
+            echo "BUILD_VER=v0.0.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+            echo "SHA=${CI_SHA_SHORT}" >> $GITHUB_ENV
+            echo "REF=${CI_ACTION_REF_NAME_SLUG}" >> $GITHUB_ENV
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -47,7 +42,10 @@ jobs:
         with:
           context: .
           platforms: linux/amd64, linux/arm64
-          push: ${{ github.even_name != 'pull_request' }}
-          tags: ${{ steps.meta.output.tags }}
-          labels: ${{ steps.meta.output.labels}}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+              ${{ env.IMAGE }}:${{ env.GIT_REF }}
+              ${{ env.IMAGE }}:${{ env.GIT_SHA }}
+              ${{ env.IMAGE }}:${{ env.GIT_BUILD_VER }}
+
          
