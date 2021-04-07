@@ -60,9 +60,9 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-              ${{ env.IMAGE }}:${{ env.GIT_REF }}
-              ${{ env.IMAGE }}:${{ env.GIT_SHA }}
-              ${{ env.IMAGE }}:${{ env.GIT_BUILD_VER }}
-              ${{ env.IMAGE }}:${{ env.CI_SHA_SHORT }}
+              nusak/nusak:${{ env.GIT_REF }}
+              nusak/nusak:${{ env.GIT_SHA }}
+              nusak/nusak:${{ env.GIT_BUILD_VER }}
+              nusak/nusak:${{ env.CI_SHA_SHORT }}
 
          
