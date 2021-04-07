@@ -15,7 +15,7 @@ jobs:
       - name: Set Environment Variables
         run: |
             IMG=nusak/nusak
-            echo "IMG=${IMG}" >> $GITHUB_ENV
+            echo "IMG=nusak/nusak" >> $GITHUB_ENV
             echo "BUILD_VER=v0.0.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
             echo "SHA=${CI_SHA_SHORT}" >> $GITHUB_ENV
             echo "REF=${CI_ACTION_REF_NAME_SLUG}" >> $GITHUB_ENV
@@ -63,5 +63,6 @@ jobs:
               ${{ env.IMAGE }}:${{ env.GIT_REF }}
               ${{ env.IMAGE }}:${{ env.GIT_SHA }}
               ${{ env.IMAGE }}:${{ env.GIT_BUILD_VER }}
+              ${{ env.IMAGE }}:${{ env.CI_SHA_SHORT }}
 
          
