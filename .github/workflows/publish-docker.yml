@@ -60,7 +60,8 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-              nusak/nusak:${{ env.CI_REF_NAME }}
+              nusak/nusak:${{ env.CI_REF_NAME_SLUG }}
               nusak/nusak:${{ env.CI_SHA_SHORT }}
+              nusak/nusak:${{ env.BUILD_VER }}
 
          
