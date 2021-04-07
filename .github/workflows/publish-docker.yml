@@ -4,8 +4,6 @@ on:
   push:
         branches: 
         - '**'
-        tags:
-            - 'v*.*.*'
   pull_request:
          branches:
              - 'master'
@@ -35,6 +33,10 @@ jobs:
           echo "GITHUB_RUN_NUMBER=$GITHUB_RUN_NUMBER"
           echo "GITHUB_WORKFLOW=$GITHUB_WORKFLOW"
           echo "GITHUB_ACTION=$GITHUB_ACTION"
+          echo "GITHUB_BUILD_VERS=$GITHUB_BUILD_VERS"
+          echo "GITHUB_REF=$GITHUB_REF"
+          echo "GITHUB_SHA=$GITHUB_SHA"
+          echo "GITHUB_IMG=$GITHUB_IMG"
       -
         name: Checkout
         uses: actions/checkout@v2
