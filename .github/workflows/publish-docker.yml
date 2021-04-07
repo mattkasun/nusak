@@ -21,7 +21,6 @@ jobs:
         id: meta
         uses: crazy-max/ghaction-docker-meta@v2
         with:
-            images: nusak/nusak
             tags: |
                 type=ref,event=branch
                 type=ref,event=pr
