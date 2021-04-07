@@ -14,29 +14,7 @@ jobs:
       - uses: FranzDiebold/github-env-vars-action@v2
       - name: Set Environment Variables
         run: |
-            IMG=nusak/nusak
-            echo "IMG=nusak/nusak" >> $GITHUB_ENV
             echo "BUILD_VER=v0.0.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
-            echo "SHA=${CI_SHA_SHORT}" >> $GITHUB_ENV
-            echo "REF=${CI_ACTION_REF_NAME_SLUG}" >> $GITHUB_ENV
-      -
-        name: Print Env Vars
-        run: |
-          echo "GITHUB_ACTOR=$GITHUB_ACTOR"
-          echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
-          echo "GITHUB_SHA=$GITHUB_SHA"
-          echo "GITHUB_REF=$GITHUB_REF"
-          echo "GITHUB_HEAD_REF=$GITHUB_HEAD_REF"
-          echo "GITHUB_BASE_REF=$GITHUB_BASE_REF"
-          echo "GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME"
-          echo "GITHUB_RUN_ID=$GITHUB_RUN_ID"
-          echo "GITHUB_RUN_NUMBER=$GITHUB_RUN_NUMBER"
-          echo "GITHUB_WORKFLOW=$GITHUB_WORKFLOW"
-          echo "GITHUB_ACTION=$GITHUB_ACTION"
-          echo "GITHUB_BUILD_VERS=$GITHUB_BUILD_VERS"
-          echo "GITHUB_REF=$GITHUB_REF"
-          echo "GITHUB_SHA=$GITHUB_SHA"
-          echo "GITHUB_IMG=$GITHUB_IMG"
       -
         name: Checkout
         uses: actions/checkout@v2
@@ -58,10 +36,9 @@ jobs:
         with:
           context: .
           platforms: linux/amd64, linux/arm64
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           tags: |
               nusak/nusak:${{ env.CI_REF_NAME_SLUG }}
-              nusak/nusak:${{ env.CI_SHA_SHORT }}
               nusak/nusak:${{ env.BUILD_VER }}
 
          
