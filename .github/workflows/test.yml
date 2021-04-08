@@ -1,0 +1,21 @@
+name: test
+
+on:
+  pull_request:
+    branches:
+      - 'develop'
+      - 'master'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build Number
+        if: ${{ github.head_ref }} == "master"
+        uses: einaregilsson/build-number@v3
+        with:
+          token: ${{secrets.github_token}}
+      - name: Print new Build numbe
+        run: echo "Build number is $BUILD_NUMBER"
