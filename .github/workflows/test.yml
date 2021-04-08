@@ -18,4 +18,6 @@ jobs:
         with:
           token: ${{secrets.github_token}}
       - name: Print new Build numbe
-        run: echo "Build number is $BUILD_NUMBER"
+        run: |
+          echo "Build number is $BUILD_NUMBER"
+          echo ${{github.head_ref}}
