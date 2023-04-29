@@ -1,0 +1,16 @@
+[Unit]
+Description=Web Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=mkasun
+Type=simple
+WorkingDirectory=/home/mkasun/nusak
+ExecStart=/home/mkasun/nusak/nusak
+Restart=on-success
+
+[Install]
+WantedBy=multi-user.target
+
+
