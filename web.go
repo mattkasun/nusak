@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"html/template"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -22,9 +23,6 @@ func main() {
 	router.GET("/images/*filepath", func(c *gin.Context) {
 		c.FileFromFS(c.Request.URL.Path, http.FS(f))
 	})
-	router.GET("/html/*filepath", func(c *gin.Context) {
-		c.FileFromFS(c.Request.URL.Path, http.FS(f))
-	})
 	router.GET("/assets/*filepath", func(c *gin.Context) {
 		c.FileFromFS(c.Request.URL.Path, http.FS(f))
 	})
@@ -34,7 +32,9 @@ func main() {
 	router.GET("/projects", projects)
 	router.GET("/contact", contact)
 	router.POST("/email", email)
-	router.Run(":8081")
+	if err := router.Run(":8081"); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func mainPage(c *gin.Context) {
