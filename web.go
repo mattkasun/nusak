@@ -16,13 +16,9 @@ var f embed.FS
 
 func main() {
 	router := gin.Default()
-	//router.LoadHTMLGlob("html/*")
 	templates := template.Must(template.New("").ParseFS(f, "html/*"))
 	router.SetHTMLTemplate(templates)
-	//router.Static("/stylesheet", "./stylesheet")
-	//router.Static("/assets", "./assets")
 	router.StaticFS("/favicon.ico", http.FS(icon))
-	//router.Static("images", "./images")
 	router.GET("/images/*filepath", func(c *gin.Context) {
 		c.FileFromFS(c.Request.URL.Path, http.FS(f))
 	})
@@ -33,7 +29,6 @@ func main() {
 		c.FileFromFS(c.Request.URL.Path, http.FS(f))
 	})
 
-	//router.Static("html", "./html")
 	router.GET("/", mainPage)
 	router.GET("/about", about)
 	router.GET("/projects", projects)
