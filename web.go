@@ -1,22 +1,59 @@
 package main
 
 import (
+	"embed"
+	"html/template"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func mainPage(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", "")
-}
+//go:embed: images/dontwin.png
+var icon embed.FS
+
+//go:embed assets/* html/* images/*
+var f embed.FS
 
 func main() {
 	router := gin.Default()
-	router.LoadHTMLGlob("html/*")
-	router.Static("/stylesheet", "./stylesheet")
-	router.StaticFile("favicon.ico", "./resources/favicon.ico")
-	router.Static("images", "./images")
-	router.Static("html", "./html")
+	//router.LoadHTMLGlob("html/*")
+	templates := template.Must(template.New("").ParseFS(f, "html/*"))
+	router.SetHTMLTemplate(templates)
+	//router.Static("/stylesheet", "./stylesheet")
+	//router.Static("/assets", "./assets")
+	router.StaticFS("/favicon.ico", http.FS(icon))
+	//router.Static("images", "./images")
+	router.GET("/images/*filepath", func(c *gin.Context) {
+		c.FileFromFS(c.Request.URL.Path, http.FS(f))
+	})
+	router.GET("/html/*filepath", func(c *gin.Context) {
+		c.FileFromFS(c.Request.URL.Path, http.FS(f))
+	})
+	router.GET("/assets/*filepath", func(c *gin.Context) {
+		c.FileFromFS(c.Request.URL.Path, http.FS(f))
+	})
+
+	//router.Static("html", "./html")
 	router.GET("/", mainPage)
+	router.GET("/about", about)
+	router.GET("/projects", projects)
+	router.GET("/contact", contact)
+	router.POST("/email", email)
 	router.Run(":8081")
+}
+
+func mainPage(c *gin.Context) {
+	c.HTML(http.StatusOK, "main", "")
+}
+
+func about(c *gin.Context) {
+	c.HTML(http.StatusOK, "about", "")
+}
+
+func projects(c *gin.Context) {
+	c.HTML(http.StatusOK, "projects", "")
+}
+
+func contact(c *gin.Context) {
+	c.HTML(http.StatusOK, "contact", "")
 }
