@@ -1,3 +1,9 @@
+github.com/devilcove/mux v0.2.0 h1:U9bKQs0HhGJqIFUmH84nPt5pz67QJtmVtwT2f3RKgsk=
+github.com/devilcove/mux v0.2.0/go.mod h1:Q4ysJcjpLwW7rLNTOYSlYVst5OmwFh1uZxJSCPQ34U4=
+github.com/devilcove/mux v0.2.1 h1:V9Zu+aXxrmiFqligpgdWSmWYZ8XKYYtOwPrsxyKehI4=
+github.com/devilcove/mux v0.2.1/go.mod h1:Q4ysJcjpLwW7rLNTOYSlYVst5OmwFh1uZxJSCPQ34U4=
+github.com/devilcove/mux v0.2.2 h1:d5Uf8DIaIw6mgqclVM5+mUQHkxr7xtCtnOMlZ+4OqH0=
+github.com/devilcove/mux v0.2.2/go.mod h1:Q4ysJcjpLwW7rLNTOYSlYVst5OmwFh1uZxJSCPQ34U4=
 maragu.dev/gomponents v1.1.0 h1:iCybZZChHr1eSlvkWp/JP3CrZGzctLudQ/JI3sBcO4U=
 maragu.dev/gomponents v1.1.0/go.mod h1:oEDahza2gZoXDoDHhw8jBNgH+3UR5ni7Ur648HORydM=
 maragu.dev/gomponents-htmx v0.6.1 h1:vXXOkvqEDKYxSwD1UwqmVp12YwFSuM6u8lsRn7Evyng=

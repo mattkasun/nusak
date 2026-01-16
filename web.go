@@ -4,13 +4,14 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/devilcove/mux"
 	"maragu.dev/gomponents"
 	hx "maragu.dev/gomponents-htmx"
 	"maragu.dev/gomponents/html"
 )
 
 func main() {
-	router := NewRouter(Logger)
+	router := mux.NewRouter(mux.Logger)
 	router.Get("/{$}", nusak)
 	router.Get("/home", home)
 	router.Get("/about", about)
@@ -22,11 +23,15 @@ func main() {
 	router.Run(":8080")
 }
 
-func homeContent() gomponents.Node { //nolint:ireturn
+func homeContent() gomponents.Node {
 	return gomponents.Group{
 		html.H1(gomponents.Text("Matthew R Kasun")),
 		html.Img(html.Src("/images/matt.jpg"), html.Alt("matt"), html.Style("width:200px")),
-		html.P(gomponents.Text("Systems/Software Engineer"), html.Br(), gomponents.Text("semi-retired")),
+		html.P(
+			gomponents.Text("Systems/Software Engineer"),
+			html.Br(),
+			gomponents.Text("semi-retired"),
+		),
 		html.H3(gomponents.Text("complexity;"), html.Br(),
 			gomponents.Text("Stupidity is overwhelmed;"), html.Br(),
 			gomponents.Text("Mediocrity struggles with it;"), html.Br(),
@@ -46,7 +51,7 @@ func home(w http.ResponseWriter, _ *http.Request) {
 	}
 }
 
-func about(w http.ResponseWriter, _ *http.Request) { //nolint:varnamelen
+func about(w http.ResponseWriter, _ *http.Request) {
 	if err := html.Div(html.ID("home"), html.Class("content"),
 		html.Div(html.Class("list"),
 			html.H1(html.Style("font-size:56px"), gomponents.Text("Matthew R. Kasun")),
@@ -106,7 +111,7 @@ func about(w http.ResponseWriter, _ *http.Request) { //nolint:varnamelen
 	}
 }
 
-func projects(w http.ResponseWriter, _ *http.Request) { //nolint:funlen,varnamelen
+func projects(w http.ResponseWriter, _ *http.Request) { //nolint:funlen
 	if err := html.Div(html.ID("home"), html.Class("content"),
 		html.Div(html.Class("list"),
 			html.H1(html.Style("font-size:56px"), gomponents.Text("Matthew R. Kasun")),
@@ -142,11 +147,25 @@ func projects(w http.ResponseWriter, _ *http.Request) { //nolint:funlen,varnamel
 						html.Li(gomponents.Text("time tracking web application")),
 					),
 					html.Li(
+						html.A(html.Href("https://github.com/devilcove/configuration#readme"), html.Target("_blank"),
+							html.Span(html.Class("fab fa-github"), html.Style("color:white;")),
+							gomponents.Text("Configuration"))),
+					html.Ul(
+						html.Li(gomponents.Text("application configuration management")),
+					),
+					html.Li(
 						html.A(html.Href("https://github.com/devilcove/mux#readme"), html.Target("_blank"),
 							html.Span(html.Class("fab fa-github"), html.Style("color:white;")),
 							gomponents.Text("Mux"))),
 					html.Ul(
 						html.Li(gomponents.Text("a small, idomatic http router")),
+					),
+					html.Li(
+						html.A(html.Href("https://github.com/devilcove/cookie#readme"), html.Target("_blank"),
+							html.Span(html.Class("fab fa-github"), html.Style("color:white;")),
+							gomponents.Text("Cookie"))),
+					html.Ul(
+						html.Li(gomponents.Text("encrypted HTTP cookie management")),
 					),
 					html.Li(
 						html.A(html.Href("https://github.com/devilcove/uptime#readme"), html.Target("_blank"),
@@ -184,7 +203,7 @@ func projects(w http.ResponseWriter, _ *http.Request) { //nolint:funlen,varnamel
 	}
 }
 
-func contact(w http.ResponseWriter, _ *http.Request) { //nolint:varnamelen
+func contact(w http.ResponseWriter, _ *http.Request) {
 	if err := html.Div(html.ID("home"), html.Class("content"),
 		html.H2(gomponents.Text("Contact Me")),
 		html.A(html.Href("https://www.google.com/maps/@45.2496825,-76.1298873,99550m/data=!3m1!1e3?entry=ttu"),
@@ -198,7 +217,7 @@ func contact(w http.ResponseWriter, _ *http.Request) { //nolint:varnamelen
 	}
 }
 
-func nusak(w http.ResponseWriter, _ *http.Request) { //nolint:varnamelen
+func nusak(w http.ResponseWriter, _ *http.Request) {
 	if err := layout([]gomponents.Node{
 		html.Nav(html.Class("sidebar"),
 			html.Button(html.Type("button"), hx.Target("#home"), hx.Swap("outerHTML"), hx.Get("/home"),
@@ -236,13 +255,15 @@ func serveImages(_ http.Handler) http.Handler {
 	return http.FileServer(http.Dir("images"))
 }
 
-func footer() gomponents.Node { //nolint:ireturn
+func footer() gomponents.Node {
 	return html.Div(
 		html.Class("content"),
 		html.Style("filter: invert(1)"),
 		html.Br(),
-		html.A(html.Img(html.Src("/images/digitalocean.svg"), html.Style("width:42px;height:42px;")),
-			html.Href("https://m.do.co/c/7ecc5675b40b"), html.Target("_blank"),
+		html.A(
+			html.Img(html.Src("/images/digitalocean.svg"), html.Style("width:42px;height:42px;")),
+			html.Href("https://m.do.co/c/7ecc5675b40b"),
+			html.Target("_blank"),
 			html.Alt("digital ocean"),
 		),
 		html.A(html.Img(html.Src("/images/github.svg"), html.Style("width:42px;height:42px;")),

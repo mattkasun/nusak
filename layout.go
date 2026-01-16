@@ -6,21 +6,28 @@ import (
 	"maragu.dev/gomponents/html"
 )
 
-func layout(nodes []gomponents.Node) gomponents.Node { //nolint:ireturn
-	return components.HTML5(components.HTML5Props{ //nolint:exhaustruct
+func layout(nodes []gomponents.Node) gomponents.Node {
+	return components.HTML5(components.HTML5Props{
 		Title:    "Nusak",
 		Language: "en",
 		Head: []gomponents.Node{
 			html.Meta(html.Name("viewport"), html.Content("width=device-width, initial-scale=1.0")),
 			html.Link(html.Rel("icon"), html.Href("favicon.ico"), html.Type("image.svg")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/styles.css")),
-			html.Link(html.Rel("stylesheet"), html.Href("https://fonts.googleapis.com/css?family=Tangerine|Indie+Flower|Roboto")), //nolint:lll
+			html.Link(
+				html.Rel("stylesheet"),
+				html.Href("https://fonts.googleapis.com/css?family=Tangerine|Indie+Flower|Roboto"),
+			),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/fontawesome.min.css")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/brands.min.css")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/solid.min.css")),
-			html.Script(html.Src("https://unpkg.com/htmx.org@1.9.9"),
-				html.Integrity("sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX"),
-				html.CrossOrigin("anonymous")),
+			html.Script(
+				html.Src("https://unpkg.com/htmx.org@1.9.9"),
+				html.Integrity(
+					"sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX",
+				),
+				html.CrossOrigin("anonymous"),
+			),
 		},
 		Body: []gomponents.Node{
 			html.Style("background-color: black"),
@@ -32,7 +39,7 @@ func layout(nodes []gomponents.Node) gomponents.Node { //nolint:ireturn
 	})
 }
 
-func container(center bool, children ...gomponents.Node) gomponents.Node { //nolint:ireturn
+func container(center bool, children ...gomponents.Node) gomponents.Node {
 	style := ""
 	if center {
 		style = "text-align:center; margin-left:auto; margin-right:auto"

@@ -4,27 +4,38 @@ linters:
   disable:
     - depguard
     - nlreturn
+    - noinlineerr
+    - revive
     - wsl
+    - wsl_v5
+  settings:
+    exhaustruct:
+      exclude:
+        - '.*/components\.HTML5Props'
+    funcorder:
+      alphaabetical: true
+    ireturn:
+      allow:
+        - gomponents.Node
+        - http.Handler
+    varnamelen:
+      ignore-decls:
+        - w http.ResponseWriter
   exclusions:
+    warn-unused: true
     generated: lax
-    presets:
+    #presets:
       #- comments
-      - common-false-positives
-      - legacy
-      - std-error-handling
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
+      #- common-false-positives
+      #- legacy
+      #- std-error-handling
 formatters:
   enable:
-    - gci
-    - gofmt
     - gofumpt
-    - goimports
+    - golines
+  settings:
+    gofumpt:
+      extra-rules: true
   exclusions:
+    warn-unused: true
     generated: lax
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
