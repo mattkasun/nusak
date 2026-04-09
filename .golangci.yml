@@ -9,11 +9,19 @@ linters:
     - wsl
     - wsl_v5
   settings:
+    errcheck:
+      exclude-functions:
+      - io.WriteString
     exhaustruct:
       exclude:
         - '.*/components\.HTML5Props'
+        - '.*/http\.Server'
     funcorder:
       alphaabetical: true
+    gosec:
+      excludes:
+        - G104
+        - G706
     ireturn:
       allow:
         - gomponents.Node
@@ -21,6 +29,7 @@ linters:
     varnamelen:
       ignore-decls:
         - w http.ResponseWriter
+        - r *http.Request
   exclusions:
     warn-unused: true
     generated: lax

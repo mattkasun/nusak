@@ -1,12 +1,12 @@
 .sidebar {
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: black;
-    position: fixed;
-    height: 100%;
-    overflow: scroll;
-    text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: black;
+  position: fixed;
+  height: 100%;
+  overflow: scroll;
+  text-align: center;
 }
 
 .sidebar a {
@@ -15,7 +15,7 @@
   padding: 16px;
   text-decoration: none;
 }
- 
+
 .sidebar a.active {
   background-color: #04AA6D;
   color: white;
@@ -32,26 +32,26 @@ div.content {
   text-align: center;
 }
 
-body, h2, h4, h5, h6 {
-    font-family: Roboto;
-    color: white;
+body,
+h2,
+h4,
+h5,
+h6 {
+  font-family: Garamon, serif;
+  color: white;
 }
 
-h1 {
-    font-family: Tangerine;
-    color: white;
-}
-
+h1,
 h3 {
-    font-family: Indie Flower;
-    color: white;
+  font-family: 'Bush Script MT', cursive;
+  color: white;
 }
 
 ul {
   list-style-type: none;
 }
 
-a  {
+a {
   text-decoration: none;
   color: white;
 }
@@ -68,8 +68,14 @@ a  {
     height: auto;
     position: relative;
   }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
+
+  .sidebar a {
+    float: left;
+  }
+
+  div.content {
+    margin-left: 0;
+  }
 }
 
 @media screen and (max-width: 400px) {
